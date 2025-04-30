@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
       </button>
       {% endunless %}
-			<a class="navbar-brand" href="/">
+		<!-- <a class="navbar-brand" href="/">
 				<span class="thuhidden">
 					{% if site.logo %}
 					<picture>
@@ -38,7 +38,12 @@
 					</picture>
 					{% endif %}
 					{{ site.school }}</span> Open Source Mirror Site
-			</a>
+			</a> -->
+			
+		<a class="navbar-brand" href="/" style="display: flex; align-items: center; gap: 0.5rem;">
+			<img src="{{ site.base }}/static/img/Limda-logo.png" alt="Limda Logo" style="height: 35px;" />
+			<span>{{ site.school }} Mirror</span>
+		</a>
     </div>
     <div class="{% unless page.legacy %}navbar-collapse collapse {% endunless %}navbar-right">
       <ul class="nav navbar-nav" role="menubar">
