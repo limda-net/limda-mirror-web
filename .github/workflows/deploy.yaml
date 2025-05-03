@@ -21,7 +21,7 @@ jobs:
       - name: Build _site with Docker
         run: |
           docker build -t site-builder -f Dockerfile.build .
-          docker run -it -v $(pwd):/data:rw site-builder
+          docker run --rm -v ${{ github.workspace }}:/data:rw site-builder
 
       - name: Copy _site to VPS via SSH
         uses: appleboy/scp-action@v1
