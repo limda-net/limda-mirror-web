@@ -7,37 +7,27 @@
 
 # Site settings
 title: Limda Host Mirror
-# title: 北京外国语大学开源软件镜像站
 school: Limda Host
-# school: 北京外国语大学
 brand: Limda Host
-keyword: Linux Mirror,Mirror Site,Linux,Opensource
-operator: seadog007 & james58899 & Haraguroicha
-author: TWDS Mirror Op Group
-desc: Placeholder
-# operator: 北外信息技术中心
+keyword: Linux Host,Mirror Site,Linux,Opensource
+operator: Limda Host
+author: Limda Host
+desc: Limda Host Mirror is a reliable and high-speed mirror service that provides access to a wide range of Linux distributions and open-source software. It is designed to meet the needs of developers, researchers, and users who require fast and efficient access to software packages and updates.
+
 logo: true
 meow_404: true
-issue_tag: twds
-baseurl: "" # the subpath of your site, e.g. /blog
+issue_tag: mirror
+baseurl: "" # e.g. /blog
 permalink: "/:categories/:title/"
 base: ""
-url: "https://mirror.twds.com.tw"
-hostname: "mirror.twds.com.tw"
-urlv4: "https://mirror4.twds.com.tw"
-urlv6: "https://mirror6.twds.com.tw"
-aosp: "aosp.mirror.twds.com.tw"
-arch_archive: "arch-archive.mirror.twds.com.tw"
-pypi: "pypi.mirror.twds.com.tw"
-homelink: "https://www.twds.com.tw"
+url: "https://mirror.limda.net"
+hostname: "mirror.limda.net"
+urlv4: "https://mirror4.limda.net"
+urlv6: "https://mirror6.limda.net"
+homelink: "https://mirror.limda.net"
 hide_navbar: false
 hide_download: false
-hide_server_status: false
-
-hide_mirrorz: true
-mirrorz_desc: 校园网联合镜像站
-mirrorz_link: "https://mirrors.cernet.edu.cn/list"
-mirrorz_help_link: "https://help.mirrors.cernet.edu.cn/"
+hide_server_status: true
 
 # Build settings
 highlighter: rouge
@@ -59,22 +49,3 @@ plugins:
 babel_js_extensions: 'es6'
 
 exclude: [Gemfile, Gemfile.lock, README.md, gen_robot.sh, vendor, geninfo/, gen_desc.py, Dockerfile*, build.sh]
-
-#sponsors:
-#    megvii:
-#        name: "旷视科技有限公司"
-#        link: "https://megvii.com/"
-#        short: "旷视"
-#        eng: "Megvii Technology Ltd."
-#        logo: "megvii-s"
-#    huawei:
-#        name: "华为技术有限公司"
-#        link: "https://huawei.com/"
-#        short: "华为"
-#        eng: "Huawei Technologies Co., Ltd."
-#        logo: "huawei"
-
-#poweredbys:
-#    kunpeng: "海思<sup>®</sup> Kunpeng<sup>®</sup> 920 处理器"
-
-# vim: ts=2 sts=2 sw=2 expandtab

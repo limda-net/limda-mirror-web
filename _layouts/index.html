@@ -158,7 +158,6 @@
 						<div class="thuhidden {%if site.issue%}col-md-3{%endif%}">
 							<h4> {% fa_svg far.fa-envelope %} Contact Us </h4>
 							<ul>
-								<li><strong>Feedback</strong> <br /> <a href="https://github.com/twdsco/twds-mirror-web/issues">https://github.com/twdsco/twds-mirror-web/issues</a></li>
 								<li><strong>Send Email</strong> <br /> <a class="eib1gieB"></a></li>
 							</ul>
 						</div>
@@ -174,12 +173,6 @@
 								<li><a href="https://github.com/tuna/tunasync">Mirror Manager</a></li>
 							</ul>
 						</div>
-						{% unless site.hide_mirrorz %}
-						<div class="thuhidden {%if site.issue%}col-md-2{%endif%}">
-							<h4> {% fa_svg fas.fa-paperclip %} Useful Links </h4>
-							<p><a href="{{ site.mirrorz_link }}">{{ site.mirrorz_desc }}</a></p>
-						</div>
-						{% endunless %}
 					{% unless site.issue %}
 					</div>
 					{% endunless %}

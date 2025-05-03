@@ -242,31 +242,31 @@ var vmIso = new Vue({
 	}
 });
 
-var sponsors = new Vue({
-	el: "#sponsors",
-	data: {
-		sponsors: {
-			names: [],
-			progress: 0,
-			progressText: 0,
-			total: 0,
-			totalFormated: '',
-			targetFormated: '',
-		},
-	},
-	created: function() {
-		var self = this;
-		$.getJSON("{{ site.base }}/mirror-sponsors.json", (sponsors) => {
-			self.sponsors.names = sponsors.sort((a,b) => ((b.streak - a.streak) || b.subtime - a.subtime)).map(s => s.streak > 1 ? `${s.name} × ${s.streak}` : s.name);
-			self.sponsors.total = sponsors.length * 550
-			self.sponsors.target = 41250
-			self.sponsors.progressText = (self.sponsors.total / self.sponsors.target * 100).toFixed()
-			self.sponsors.progress = Math.min(self.sponsors.progressText, 100)
-			self.sponsors.totalFormated = Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 }).format(self.sponsors.total)
-			self.sponsors.targetFormated = Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 }).format(self.sponsors.target)
-		});
-	}
-});
+// var sponsors = new Vue({
+// 	el: "#sponsors",
+// 	data: {
+// 		sponsors: {
+// 			names: [],
+// 			progress: 0,
+// 			progressText: 0,
+// 			total: 0,
+// 			totalFormated: '',
+// 			targetFormated: '',
+// 		},
+// 	},
+// 	created: function() {
+// 		var self = this;
+// 		$.getJSON("{{ site.base }}/mirror-sponsors.json", (sponsors) => {
+// 			self.sponsors.names = sponsors.sort((a,b) => ((b.streak - a.streak) || b.subtime - a.subtime)).map(s => s.streak > 1 ? `${s.name} × ${s.streak}` : s.name);
+// 			self.sponsors.total = sponsors.length * 550
+// 			self.sponsors.target = 41250
+// 			self.sponsors.progressText = (self.sponsors.total / self.sponsors.target * 100).toFixed()
+// 			self.sponsors.progress = Math.min(self.sponsors.progressText, 100)
+// 			self.sponsors.totalFormated = Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 }).format(self.sponsors.total)
+// 			self.sponsors.targetFormated = Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 }).format(self.sponsors.target)
+// 		});
+// 	}
+// });
 
 });
 

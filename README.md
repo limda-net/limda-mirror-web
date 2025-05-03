@@ -8,7 +8,7 @@ License with GPLv2
 ```
 cd mirror-web
 docker build -t builden -f Dockerfile.build .
-docker run -it -v /path/to/mirror-web/:/data builden
+docker run -it -v /root/limda-mirror-web:/data builden
 ```
 
 Download following assets before build
