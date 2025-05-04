@@ -1,38 +1,16 @@
 official_list:
-  - alhp
   - almalinux
-  - alpine
   - archlinux
-  - archlinuxcn
-  - armbian-apt
-  - armbian-dl
-  - blender
-  - centos-stream
   - debian
   - fedora
-  - gimp
-  - gnu
-  - gnu-alpha
-  - jenkins
-  - kali
-  - kali-images
-  - kde
-  - kde-application
   - linuxmint
   - linuxmint-iso
-  - lyx
-  - rockylinux
-  - rockylinux-sigs
-  - tdf
-  - termux
-  - ubuntu
-  - ubuntu-ports
+  - ubuntu-archive
   - ubuntu-releases
-  - videolan
 
 # Content Related
 mirror_desc:
-  - name: armbian-apt
+  - name: almalinux
     desc: Linux for single board computers (Packages)
   - name: armbian-dl
     desc: Linux for single board computers (Images)
