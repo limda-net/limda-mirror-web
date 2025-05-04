@@ -1,0 +1,54 @@
+---
+category: help
+layout: help
+mirrorid: archlinux
+excerpt_separator: ""
+---
+
+{% raw %}<h1>Arch Linux Repository</h1>{% endraw %}
+<div class="z-wrap">
+    <form class="z-form z-global">
+        <div>
+            <label for="e0a5cecb">Protocol</label>
+            <select id="e0a5cecb" name="host">
+                <option selected="selected" value="{{ site.url }}">Auto</option>
+                <option value="{{ site.urlv4 }}">IPv4</option>
+                <option value="{{ site.urlv6 }}">IPv6</option>
+            </select>
+        </div>
+        <div>
+            <input id="a44d763c" name="_scheme" type="checkbox" checked>
+            <label for="a44d763c">Use HTTPS</label>
+        </div>
+        <div>
+            <input id="a659e7da" name="_sudo" type="checkbox">
+            <label for="a659e7da">Use sudo</label>
+        </div>
+    </form>
+</div>
+{% raw %}
+<div class="z-help">
+<h2>Project Introduction</h2>
+<p>Arch Linux is a general-purpose x86-64 GNU/Linux distribution. Arch uses a rolling upgrade model and strives to provide the latest stable version of software. The initial installation of Arch is just a basic system, and users can then install the required software according to their preferences and configure it to meet their ideal system.</p>
+<h2>Usage</h2>
+<p>Pacman takes the order of servers in <code>mirrorlist</code> as priority, so adding mirrors needs to be added at the top of the file; you can also comment out all other mirrors.</p>
+<p>For detailed instructions on using mirrors in Arch Linux, see the <a href="https://wiki.archlinux.org/title/mirrors">official documentation</a></p>
+<p>Edit <code>/etc/pacman.d/mirrorlist</code> and add the following to the top of the file:</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="ini" z-path="/etc/pacman.d/mirrorlist">
+Server = {{endpoint}}/$repo/os/$arch
+</pre>
+<p>Update the package cache:</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="bash">
+{{sudo}}pacman -Syyu
+</pre>
+<p>The two <code>y</code>s can avoid problems when switching from a <strong>broken</strong> mirror to a <strong>normal</strong> mirror.</p>
+<p>If you are switching from a newer mirror to an older one, the following command can downgrade some packages to avoid partial updates of the system.</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="bash">
+{{sudo}}pacman -Syyuu
+</pre><script id="z-config" type="application/x-mirrorz-help">eyJfIjogIkFyY2ggTGludXggUmVwb3NpdG9yeSIsICJibG9jayI6IFsiaW50cm8iLCAidXNhZ2UiXSwgImlucHV0Ijoge30sICJuYW1lIjogImFyY2hsaW51eCJ9</script>
+</div>
+
+{% endraw %}
+
+<script src="/static/js/mustache.min.js?{{ site.data['hash'] }}"></script>
+<script src="/static/js/zdocs.js?{{ site.data['hash'] }}"></script>

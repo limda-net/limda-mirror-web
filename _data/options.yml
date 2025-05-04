@@ -11,33 +11,22 @@ official_list:
 # Content Related
 mirror_desc:
   - name: almalinux
-    desc: Linux for single board computers (Packages)
-  - name: armbian-dl
-    desc: Linux for single board computers (Images)
-  - name: ubuntu
-    desc: 流行的 Linux 發行版 Ubuntu 的安裝檔和官方軟體庫
-  - name: ubuntu-releases
-    desc: Ubuntu Images
-  - name: ubuntu-cd
-    desc: Ports, Unsupported, and Experimental Images for Ubuntu
-  - name: alhp
-    desc: Archlinux-based repos build with different x86-64 feature levels, -O3 and LTO.
+    desc: AlmaLinux Software Repo
+  - name: archlinux
+    desc: Arch Linux Software Repo
+  - name: debian
+    desc: Debian Software Repo
   - name: fedora
-    desc: Fedora & EPEL
-  - name: gnu
-    desc: Releases of GNU programs
-  - name: gnu-alpha
-    desc: Releases of GNU programs (Alpha version)
-  - name: lyx
-    desc: LyX is an open source, graphical user interface document processor based on the LaTeX typesetting system.
-  - name: remi
-    desc: Remi's RPM repository
-  - name: rpmfusion
-    desc: RPM Fusion provides software that the Fedora Project or Red Hat doesn't want to ship.
-  - name: tdf
-    desc: The Document Foundation - The House of LibreOffice and Document Liberation Project
-  - name: videolan
-    desc: VideoLAN (VLC)
+    desc: Fedora Software Repo
+  - name: linuxmint
+    desc: Linux Mint Software Repo
+  - name: linuxmint-iso
+    desc: Linux Mint ISO Repo
+  - name: ubuntu-archive
+    desc: Ubuntu Software Repo
+  - name: ubuntu-releases
+    desc: Ubuntu ISO Repo
+
 
 new_mirrors: []
 

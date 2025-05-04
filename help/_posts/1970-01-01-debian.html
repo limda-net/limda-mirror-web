@@ -1,0 +1,142 @@
+---
+category: help
+layout: help
+mirrorid: debian
+excerpt_separator: ""
+---
+
+{% raw %}<h1>Debian Repository</h1>{% endraw %}
+<div class="z-wrap">
+    <form class="z-form z-global">
+        <div>
+            <label for="e0a5cecb">Protocol</label>
+            <select id="e0a5cecb" name="host">
+                <option selected="selected" value="{{ site.url }}">Auto</option>
+                <option value="{{ site.urlv4 }}">IPv4</option>
+                <option value="{{ site.urlv6 }}">IPv6</option>
+            </select>
+        </div>
+        <div>
+            <input id="a44d763c" name="_scheme" type="checkbox" checked>
+            <label for="a44d763c">Use HTTPS</label>
+        </div>
+        <div>
+            <input id="a659e7da" name="_sudo" type="checkbox">
+            <label for="a659e7da">Use sudo</label>
+        </div>
+    </form>
+</div>
+{% raw %}
+<div class="z-help">
+<p>Most Debian software source configuration files use the traditional One-Line-Style, with the path being <code>/etc/apt/sources.list</code>; however, for container images, starting from Debian 12, the software source configuration file is changed to the DEB822 format, with the path being <code>/etc/apt/sources.list.d/debian.sources</code>. In general, replace the Debian default source address <code>http://deb.debian.org/</code> in the corresponding file with the mirror address.</p>
+<p>Debian Buster and above versions support HTTPS sources by default. If you are unable to pull the HTTPS source, please use the HTTP source and install it first:</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="bash">
+{{sudo}}apt install apt-transport-https ca-certificates
+</pre>
+<h3>Traditional format (<code>/etc/apt/sources.list</code>)</h3>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"><div><label for="wi3XfIg5" title="">Debian Version</label><select id="wi3XfIg5" name="release" title=""><option value="bookworm">Debian 12 (bookworm)</option><option value="bullseye">Debian 11 (bullseye)</option><option value="testing">testing</option><option value="sid">sid</option></select></div><div><input id="IykZkue8" name="src" title="Source code sources are usually used for building and debugging. Enabling them will affect the update speed." type="checkbox"/><label for="IykZkue8" title="Source code sources are usually used for building and debugging. Enabling them will affect the update speed.">Enable source code</label></div><div><input checked="checked" id="kBdme3Hj" name="nf" title="" type="checkbox"/><label for="kBdme3Hj" title="">Using non-free software sources</label></div><div><input id="X52ud6Oo" name="mirror_security" title="In order to obtain security updates more promptly, it is not recommended to use the mirror site security update software source" type="checkbox"/><label for="X52ud6Oo" title="In order to obtain security updates more promptly, it is not recommended to use the mirror site security update software source">Force security updates to use mirrors</label></div></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-input="release src nf mirror_security" z-path="/etc/apt/sources.list">
+# The source mirror is commented out by default to increase the speed of apt update. You can uncomment it if necessary
+{{#sid}}
+deb {{endpoint}}/ sid main contrib{{#nf}}{{nonfree}}{{/nf}}
+{{src}}deb-src {{endpoint}}/ sid main contrib{{#nf}}{{nonfree}}{{/nf}}
+{{/sid}}
+{{^sid}}
+deb {{endpoint}}/ {{release}} main contrib{{#nf}}{{nonfree}}{{/nf}}
+{{src}}deb-src {{endpoint}}/ {{release}} main contrib{{#nf}}{{nonfree}}{{/nf}}
+
+deb {{endpoint}}/ {{release}}-updates main contrib{{#nf}}{{nonfree}}{{/nf}}
+{{src}}deb-src {{endpoint}}/ {{release}}-updates main contrib{{#nf}}{{nonfree}}{{/nf}}
+
+deb {{endpoint}}/ {{release}}-backports main contrib{{#nf}}{{nonfree}}{{/nf}}
+{{src}}deb-src {{endpoint}}/ {{release}}-backports main contrib{{#nf}}{{nonfree}}{{/nf}}
+
+# The following security update software sources include official sources and mirror site configurations. If necessary, you can modify the comments and switch them yourself
+{{#mirror_security}}
+deb {{endpoint}}-security {{release}}{{security}} main contrib{{#nf}}{{nonfree}}{{/nf}}
+{{src}}deb-src {{endpoint}}-security {{release}}{{security}} main contrib{{#nf}}{{nonfree}}{{/nf}}
+{{/mirror_security}}
+{{^mirror_security}}
+deb https://security.debian.org/debian-security {{release}}{{security}} main contrib{{#nf}}{{nonfree}}{{/nf}}
+{{src}}deb-src https://security.debian.org/debian-security {{release}}{{security}} main contrib{{#nf}}{{nonfree}}{{/nf}}
+{{/mirror_security}}
+{{/sid}}
+</pre>
+<h3>DEB822 format (<code>/etc/apt/sources.list.d/debian.sources</code>)</h3>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"><div><label for="FifocNzP" title="">Debian Version</label><select id="FifocNzP" name="release_deb822" title=""><option value="bookworm">Debian 12 (bookworm)</option><option value="testing">testing</option><option value="sid">sid</option></select></div><div><input id="fMwQhNQt" name="src" title="Source code sources are usually used for building and debugging. Enabling them will affect the update speed." type="checkbox"/><label for="fMwQhNQt" title="Source code sources are usually used for building and debugging. Enabling them will affect the update speed.">Enable source code</label></div><div><input checked="checked" id="K5iHVYzT" name="nf" title="" type="checkbox"/><label for="K5iHVYzT" title="">Using non-free software sources</label></div><div><input id="ZIwc4lU8" name="mirror_security" title="In order to obtain security updates more promptly, it is not recommended to use the mirror site security update software source" type="checkbox"/><label for="ZIwc4lU8" title="In order to obtain security updates more promptly, it is not recommended to use the mirror site security update software source">Force security updates to use mirrors</label></div></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-input="release_deb822 src nf mirror_security" z-path="/etc/apt/sources.list.d/debian.sources">
+{{#sid}}
+Types: deb
+URIs: {{endpoint}}
+Suites: sid
+Components: main contrib{{#nf}} non-free non-free-firmware{{/nf}}
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+
+# The source image is commented by default to improve the speed of apt update. You can uncomment it if necessary
+{{src}}Types: deb-src
+{{src}}URIs: {{endpoint}}
+{{src}}Suites: sid
+{{src}}Components: main contrib{{#nf}} non-free non-free-firmware{{/nf}}
+{{src}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+{{/sid}}
+{{^sid}}
+Types: deb
+URIs: {{endpoint}}
+Suites: {{release_deb822}} {{release_deb822}}-updates {{release_deb822}}-backports
+Components: main contrib{{#nf}} non-free non-free-firmware{{/nf}}
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+
+# The source image is commented by default to improve the speed of apt update. You can uncomment it if necessary
+{{src}}Types: deb-src
+{{src}}URIs: {{endpoint}}
+{{src}}Suites: {{release_deb822}} {{release_deb822}}-updates {{release_deb822}}-backports
+{{src}}Components: main contrib{{#nf}} non-free non-free-firmware{{/nf}}
+{{src}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+
+# The following security update software sources include official sources and mirror site configurations. If necessary, you can modify the comments and switch them yourself
+{{#mirror_security}}
+Types: deb
+URIs: {{endpoint}}-security
+Suites: {{release_deb822}}-security
+Components: main contrib{{#nf}} non-free non-free-firmware{{/nf}}
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+
+{{src}}Types: deb-src
+{{src}}URIs: {{endpoint}}-security
+{{src}}Suites: {{release_deb822}}-security
+{{src}}Components: main contrib{{#nf}} non-free non-free-firmware{{/nf}}
+{{src}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+{{/mirror_security}}
+{{^mirror_security}}
+Types: deb
+URIs: https://security.debian.org/debian-security
+Suites: {{release_deb822}}-security
+Components: main contrib{{#nf}} non-free non-free-firmware{{/nf}}
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+
+{{src}}Types: deb-src
+{{src}}URIs: https://security.debian.org/debian-security
+{{src}}Suites: {{release_deb822}}-security
+{{src}}Components: main contrib{{#nf}} non-free non-free-firmware{{/nf}}
+{{src}}Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+{{/mirror_security}}
+{{/sid}}
+</pre>
+<p>For quick and easy configuration, the debian-security configuration is also included here. Generally speaking, mirror sites will also provide debian-security. For more accurate information, you can go to <a href="../debian-security/">Debian Security Help</a> to confirm.</p>
+<p>However, in general, in order to obtain security updates more promptly, it is not recommended to use the mirror site security update software source, because mirror sites often have synchronization delays. Reference https://www.debian.org/security/faq.en.html#mirror</p>
+<blockquote>
+<p>The purpose of security.debian.org is to make security updates available as quickly and easily as possible.</p>
+<p>Encouraging the use of unofficial mirrors would add extra complexity that is usually not needed and that can cause frustration if these mirrors are not kept up to date.</p>
+</blockquote>
+<h3>Connection reset by peer</h3>
+<p>In apt 2.1.9 and later versions, the HTTP Pipelining feature of apt is suspected to be incompatible with the Nginx server, which may cause occasional Connection reset by peer errors when downloading a large number of packages from mirror sites with high bandwidth (such as system upgrades) (see <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=973581">Debian bug #973581</a> for details).</p>
+<p>Currently, users can solve this problem by turning off the HTTP Pipelining feature.<br/>
+If you need to disable it, you can add the <code>-o Acquire::http::Pipeline-Depth=0</code> parameter when using the <code>apt</code> command,<br/>
+or use the following command to add the relevant settings to the apt system configuration:</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" data-lang="bash">
+echo "Acquire::http::Pipeline-Depth \"0\";" &gt; /etc/apt/apt.conf.d/99nopipelining
+</pre><script id="z-config" type="application/x-mirrorz-help">eyJfIjogIkRlYmlhbiBSZXBvc2l0b3J5IiwgImJsb2NrIjogWyJ1c2FnZSIsICJuZ2lueCJdLCAiaW5wdXQiOiB7InJlbGVhc2UiOiB7Il8iOiAiRGViaWFuIFZlcnNpb24iLCAib3B0aW9uIjogeyJib29rd29ybSI6IHsiXyI6ICJEZWJpYW4gMTIgKGJvb2t3b3JtKSIsICJzZWN1cml0eSI6ICItc2VjdXJpdHkiLCAibm9uZnJlZSI6ICIgbm9uLWZyZWUgbm9uLWZyZWUtZmlybXdhcmUifSwgImJ1bGxzZXllIjogeyJfIjogIkRlYmlhbiAxMSAoYnVsbHNleWUpIiwgInNlY3VyaXR5IjogIi1zZWN1cml0eSIsICJub25mcmVlIjogIiBub24tZnJlZSJ9LCAidGVzdGluZyI6IHsic2VjdXJpdHkiOiAiLXNlY3VyaXR5IiwgIm5vbmZyZWUiOiAiIG5vbi1mcmVlIG5vbi1mcmVlLWZpcm13YXJlIn0sICJzaWQiOiB7InNpZCI6IHRydWUsICJub25mcmVlIjogIiBub24tZnJlZSBub24tZnJlZS1maXJtd2FyZSJ9fX0sICJyZWxlYXNlX2RlYjgyMiI6IHsiXyI6ICJEZWJpYW4gVmVyc2lvbiIsICJvcHRpb24iOiB7ImJvb2t3b3JtIjogeyJfIjogIkRlYmlhbiAxMiAoYm9va3dvcm0pIn0sICJ0ZXN0aW5nIjogbnVsbCwgInNpZCI6IHsic2lkIjogdHJ1ZX19fSwgInNyYyI6IHsiXyI6ICJFbmFibGUgc291cmNlIGNvZGUiLCAibm90ZSI6ICJTb3VyY2UgY29kZSBzb3VyY2VzIGFyZSB1c3VhbGx5IHVzZWQgZm9yIGJ1aWxkaW5nIGFuZCBkZWJ1Z2dpbmcuIEVuYWJsaW5nIHRoZW0gd2lsbCBhZmZlY3QgdGhlIHVwZGF0ZSBzcGVlZC4iLCAidHJ1ZSI6ICIiLCAiZmFsc2UiOiAiIyAifSwgIm5mIjogeyJfIjogIlVzaW5nIG5vbi1mcmVlIHNvZnR3YXJlIHNvdXJjZXMiLCAiZGVmYXVsdCI6IHRydWUsICJ0cnVlIjogbnVsbH0sICJtaXJyb3Jfc2VjdXJpdHkiOiB7Il8iOiAiRm9yY2Ugc2VjdXJpdHkgdXBkYXRlcyB0byB1c2UgbWlycm9ycyIsICJub3RlIjogIkluIG9yZGVyIHRvIG9idGFpbiBzZWN1cml0eSB1cGRhdGVzIG1vcmUgcHJvbXB0bHksIGl0IGlzIG5vdCByZWNvbW1lbmRlZCB0byB1c2UgdGhlIG1pcnJvciBzaXRlIHNlY3VyaXR5IHVwZGF0ZSBzb2Z0d2FyZSBzb3VyY2UiLCAidHJ1ZSI6IG51bGx9fSwgIm5hbWUiOiAiZGViaWFuIn0=</script>
+</div>
+
+{% endraw %}
+
+<script src="/static/js/mustache.min.js?{{ site.data['hash'] }}"></script>
+<script src="/static/js/zdocs.js?{{ site.data['hash'] }}"></script>

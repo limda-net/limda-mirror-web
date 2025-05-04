@@ -1,0 +1,43 @@
+---
+category: help
+layout: help
+mirrorid: linuxmint
+excerpt_separator: ""
+---
+
+{% raw %}<h1>Linux Mint Software Repository</h1>{% endraw %}
+<div class="z-wrap">
+    <form class="z-form z-global">
+        <div>
+            <label for="e0a5cecb">Protocol</label>
+            <select id="e0a5cecb" name="host">
+                <option selected="selected" value="{{ site.url }}">Auto</option>
+                <option value="{{ site.urlv4 }}">IPv4</option>
+                <option value="{{ site.urlv6 }}">IPv6</option>
+            </select>
+        </div>
+        <div>
+            <input id="a44d763c" name="_scheme" type="checkbox" checked>
+            <label for="a44d763c">Use HTTPS</label>
+        </div>
+        <div>
+            <input id="a659e7da" name="_sudo" type="checkbox">
+            <label for="a659e7da">Use sudo</label>
+        </div>
+    </form>
+</div>
+{% raw %}
+<div class="z-help">
+<p>Linux Mint also uses apt as a package manager. Similar to Ubuntu and Debian, you need to edit the paths in <code>/etc/apt/sources.list</code> and <code>/etc/apt/sources.list.d/*</code>. For some sources from Ubuntu and Debian, you can refer to <a href="../ubuntu/">Ubuntu Help</a> and <a href="../debian/">Debian Help</a> for modification.</p>
+<p>You need to modify <code>/etc/apt/sources.list.d/official-package-repositories.list</code> (note the backup), and replace <code>packages.linuxmint.com</code> with the mirror source:</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"><div><label for="trexZ9C9" title="">Linux Mint Versions</label><select id="trexZ9C9" name="release" title=""><option value="xia">22.1 (xia)</option><option value="wilma">22 (wilma)</option><option value="virginia">21.3 (virginia)</option><option value="victoria">21.2 (victoria)</option><option value="vera">21.1 (vera)</option><option value="vanessa">21 (vanessa)</option></select></div></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-input="release">
+deb {{endpoint}}/ {{release}} main upstream import backport
+</pre>
+<p>Then run <code>apt update</code>.</p>
+<p>Note: After the completion, please do not use mintsources (the built-in graphical software source setting tool) to perform any operations, because after the operation, mintsources will copy <code>/etc/apt/sources.list.d/official-package-repositories.list</code> regardless of whether you press "OK".</p><script id="z-config" type="application/x-mirrorz-help">eyJfIjogIkxpbnV4IE1pbnQgU29mdHdhcmUgUmVwb3NpdG9yeSIsICJibG9jayI6IFsibGludXhtaW50Il0sICJpbnB1dCI6IHsicmVsZWFzZSI6IHsiXyI6ICJMaW51eCBNaW50IFZlcnNpb25zIiwgIm9wdGlvbiI6IHsieGlhIjogeyJfIjogIjIyLjEgKHhpYSkifSwgIndpbG1hIjogeyJfIjogIjIyICh3aWxtYSkifSwgInZpcmdpbmlhIjogeyJfIjogIjIxLjMgKHZpcmdpbmlhKSJ9LCAidmljdG9yaWEiOiB7Il8iOiAiMjEuMiAodmljdG9yaWEpIn0sICJ2ZXJhIjogeyJfIjogIjIxLjEgKHZlcmEpIn0sICJ2YW5lc3NhIjogeyJfIjogIjIxICh2YW5lc3NhKSJ9fX19LCAibmFtZSI6ICJsaW51eG1pbnQifQ==</script>
+</div>
+
+{% endraw %}
+
+<script src="/static/js/mustache.min.js?{{ site.data['hash'] }}"></script>
+<script src="/static/js/zdocs.js?{{ site.data['hash'] }}"></script>

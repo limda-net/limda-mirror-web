@@ -1,0 +1,122 @@
+---
+category: help
+layout: help
+mirrorid: ubuntu
+excerpt_separator: ""
+---
+
+{% raw %}<h1>Ubuntu Software Repository</h1>{% endraw %}
+<div class="z-wrap">
+    <form class="z-form z-global">
+        <div>
+            <label for="e0a5cecb">Protocol</label>
+            <select id="e0a5cecb" name="host">
+                <option selected="selected" value="{{ site.url }}">Auto</option>
+                <option value="{{ site.urlv4 }}">IPv4</option>
+                <option value="{{ site.urlv6 }}">IPv6</option>
+            </select>
+        </div>
+        <div>
+            <input id="a44d763c" name="_scheme" type="checkbox" checked>
+            <label for="a44d763c">Use HTTPS</label>
+        </div>
+        <div>
+            <input id="a659e7da" name="_sudo" type="checkbox">
+            <label for="a659e7da">Use sudo</label>
+        </div>
+    </form>
+</div>
+{% raw %}
+<div class="z-help">
+<p>This image only contains packages for 32/64-bit x86 architecture processors. For devices with architectures such as ARM (arm64, armhf), PowerPC (ppc64el), RISC-V (riscv64), and S390x (the corresponding official source is ports.ubuntu.com), please use the <a href="../ubuntu-ports/">ubuntu-ports image</a>.</p>
+<p>For versions no longer supported by Ubuntu, please refer to <a href="../ubuntu-old-releases/">Ubuntu Old Release Help</a>.</p>
+<p>Before Ubuntu 24.04, Ubuntu's software source configuration file used the traditional One-Line-Style, and the path was <code>/etc/apt/sources.list</code>; starting from Ubuntu 24.04, Ubuntu's software source configuration file has changed to the DEB822 format, and the path is <code>/etc/apt/sources.list.d/ubuntu.sources</code>.</p>
+<p>Make a backup of the corresponding files that come with the system, and then replace the corresponding content below according to the format selection, and you can use the selected software source image.</p>
+<h3>Traditional format (<code>/etc/apt/sources.list</code>)</h3>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"><div><label for="MqQZAaMv" title="">Ubuntu Versions</label><select id="MqQZAaMv" name="release" title=""><option value="noble">Ubuntu 24.04 LTS (noble)</option><option value="plucky">Ubuntu 25.04 (plucky)</option><option value="oracular">Ubuntu 24.10 (oracular)</option><option value="jammy">Ubuntu 22.04 LTS (jammy)</option><option value="focal">Ubuntu 20.04 LTS (focal)</option><option value="bionic">Ubuntu 18.04 LTS (bionic)</option><option value="xenial">Ubuntu 16.04 LTS (xenial) (EOL)</option></select></div><div><input id="rZRCfmjN" name="src" title="Source code sources are usually used for building and debugging. Enabling them will affect the update speed." type="checkbox"/><label for="rZRCfmjN" title="Source code sources are usually used for building and debugging. Enabling them will affect the update speed.">Enable source code</label></div><div><input id="MKDU18dR" name="proposed" title="" type="checkbox"/><label for="MKDU18dR" title="">Enable proposed</label></div><div><input id="v2ZBDTi9" name="mirror_security" title="In order to obtain security updates more promptly, it is not recommended to use the mirror site security update software source" type="checkbox"/><label for="v2ZBDTi9" title="In order to obtain security updates more promptly, it is not recommended to use the mirror site security update software source">Force security updates to use mirrors</label></div></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-input="release src proposed mirror_security" z-path="/etc/apt/sources.list">
+# The source mirror is commented by default to improve the speed of apt update. You can uncomment it if necessary
+deb {{endpoint}}/ {{release}} main restricted universe multiverse
+{{src}}deb-src {{endpoint}}/ {{release}} main restricted universe multiverse
+deb {{endpoint}}/ {{release}}-updates main restricted universe multiverse
+{{src}}deb-src {{endpoint}}/ {{release}}-updates main restricted universe multiverse
+deb {{endpoint}}/ {{release}}-backports main restricted universe multiverse
+{{src}}deb-src {{endpoint}}/ {{release}}-backports main restricted universe multiverse
+
+# The following security update software sources include official sources and mirror site configurations. If necessary, you can modify the comments and switch them yourself.
+{{#mirror_security}}
+deb {{endpoint}}/ {{release}}-security main restricted universe multiverse
+{{src}}deb-src {{endpoint}}/ {{release}}-security main restricted universe multiverse
+{{/mirror_security}}
+{{^mirror_security}}
+deb http://security.ubuntu.com/ubuntu/ {{release}}-security main restricted universe multiverse
+{{src}}deb-src http://security.ubuntu.com/ubuntu/ {{release}}-security main restricted universe multiverse
+{{/mirror_security}}
+
+# Pre-release software source, not recommended to enable
+{{proposed}}deb {{endpoint}}/ {{release}}-proposed main restricted universe multiverse
+{{proposed}}{{src}}deb-src {{endpoint}}/ {{release}}-proposed main restricted universe multiverse
+</pre>
+<h3>DEB822 format (<code>/etc/apt/sources.list.d/ubuntu.sources</code>)</h3>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"><div><label for="fKVKewy3" title="">Ubuntu Versions</label><select id="fKVKewy3" name="release_deb822" title=""><option value="noble">Ubuntu 24.04 LTS (noble)</option></select></div><div><input id="M1K8Zsfc" name="src" title="Source code sources are usually used for building and debugging. Enabling them will affect the update speed." type="checkbox"/><label for="M1K8Zsfc" title="Source code sources are usually used for building and debugging. Enabling them will affect the update speed.">Enable source code</label></div><div><input id="qYujtc5q" name="proposed" title="" type="checkbox"/><label for="qYujtc5q" title="">Enable proposed</label></div><div><input id="OiuStZxs" name="mirror_security" title="In order to obtain security updates more promptly, it is not recommended to use the mirror site security update software source" type="checkbox"/><label for="OiuStZxs" title="In order to obtain security updates more promptly, it is not recommended to use the mirror site security update software source">Force security updates to use mirrors</label></div></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-input="release_deb822 src proposed mirror_security" z-path="/etc/apt/sources.list.d/ubuntu.sources">
+Types: deb
+URIs: {{endpoint}}
+Suites: {{release_deb822}} {{release_deb822}}-updates {{release_deb822}}-backports
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# The source mirror is commented by default to improve the speed of apt update. If necessary, you can uncomment it yourself
+{{src}}Types: deb-src
+{{src}}URIs: {{endpoint}}
+{{src}}Suites: {{release_deb822}} {{release_deb822}}-updates {{release_deb822}}-backports
+{{src}}Components: main restricted universe multiverse
+{{src}}Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# The following security update software sources include official sources and mirror station configurations. If necessary, you can modify the comments and switch them yourself
+{{#mirror_security}}
+Types: deb
+URIs: {{endpoint}}
+Suites: {{release_deb822}}-security
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+{{src}}Types: deb-src
+{{src}}URIs: {{endpoint}}
+{{src}}Suites: {{release_deb822}}-security
+{{src}}Components: main restricted universe multiverse
+{{src}}Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+{{/mirror_security}}
+{{^mirror_security}}
+Types: deb
+URIs: http://security.ubuntu.com/ubuntu/
+Suites: {{release_deb822}}-security
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+{{src}}Types: deb-src
+{{src}}URIs: http://security.ubuntu.com/ubuntu/
+{{src}}Suites: {{release_deb822}}-security
+{{src}}Components: main restricted universe multiverse
+{{src}}Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+{{/mirror_security}}
+
+# Pre-release software source, not recommended to be enabled
+
+{{proposed}}Types: deb
+{{proposed}}URIs: {{endpoint}}
+{{proposed}}Suites: {{release_deb822}}-proposed
+{{proposed}}Components: main restricted universe multiverse
+{{proposed}}Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+{{proposed}}{{src}}Types: deb-src
+{{proposed}}{{src}}URIs: {{endpoint}}
+{{proposed}}{{src}}Suites: {{release_deb822}}-proposed
+{{proposed}}{{src}}Components: main restricted universe multiverse
+{{proposed}}{{src}}Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+</pre>
+<p>Due to the delay in synchronization with the mirror station, the production environment system may not be able to check and install the latest security updates in time. It is not recommended to replace the security source.</p><script id="z-config" type="application/x-mirrorz-help">eyJfIjogIlVidW50dSBTb2Z0d2FyZSBSZXBvc2l0b3J5IiwgImJsb2NrIjogWyJ1YnVudHUiXSwgImlucHV0IjogeyJyZWxlYXNlIjogeyJfIjogIlVidW50dSBWZXJzaW9ucyIsICJvcHRpb24iOiB7Im5vYmxlIjogeyJfIjogIlVidW50dSAyNC4wNCBMVFMgKG5vYmxlKSJ9LCAicGx1Y2t5IjogeyJfIjogIlVidW50dSAyNS4wNCAocGx1Y2t5KSJ9LCAib3JhY3VsYXIiOiB7Il8iOiAiVWJ1bnR1IDI0LjEwIChvcmFjdWxhcikifSwgImphbW15IjogeyJfIjogIlVidW50dSAyMi4wNCBMVFMgKGphbW15KSJ9LCAiZm9jYWwiOiB7Il8iOiAiVWJ1bnR1IDIwLjA0IExUUyAoZm9jYWwpIn0sICJiaW9uaWMiOiB7Il8iOiAiVWJ1bnR1IDE4LjA0IExUUyAoYmlvbmljKSJ9LCAieGVuaWFsIjogeyJfIjogIlVidW50dSAxNi4wNCBMVFMgKHhlbmlhbCkgKEVPTCkifX19LCAicmVsZWFzZV9kZWI4MjIiOiB7Il8iOiAiVWJ1bnR1IFZlcnNpb25zIiwgIm9wdGlvbiI6IHsibm9ibGUiOiB7Il8iOiAiVWJ1bnR1IDI0LjA0IExUUyAobm9ibGUpIn19fSwgInNyYyI6IHsiXyI6ICJFbmFibGUgc291cmNlIGNvZGUiLCAibm90ZSI6ICJTb3VyY2UgY29kZSBzb3VyY2VzIGFyZSB1c3VhbGx5IHVzZWQgZm9yIGJ1aWxkaW5nIGFuZCBkZWJ1Z2dpbmcuIEVuYWJsaW5nIHRoZW0gd2lsbCBhZmZlY3QgdGhlIHVwZGF0ZSBzcGVlZC4iLCAidHJ1ZSI6ICIiLCAiZmFsc2UiOiAiIyAifSwgInByb3Bvc2VkIjogeyJfIjogIkVuYWJsZSBwcm9wb3NlZCIsICJ0cnVlIjogIiIsICJmYWxzZSI6ICIjICJ9LCAibWlycm9yX3NlY3VyaXR5IjogeyJfIjogIkZvcmNlIHNlY3VyaXR5IHVwZGF0ZXMgdG8gdXNlIG1pcnJvcnMiLCAibm90ZSI6ICJJbiBvcmRlciB0byBvYnRhaW4gc2VjdXJpdHkgdXBkYXRlcyBtb3JlIHByb21wdGx5LCBpdCBpcyBub3QgcmVjb21tZW5kZWQgdG8gdXNlIHRoZSBtaXJyb3Igc2l0ZSBzZWN1cml0eSB1cGRhdGUgc29mdHdhcmUgc291cmNlIiwgInRydWUiOiBudWxsfX0sICJuYW1lIjogInVidW50dSJ9</script>
+</div>
+
+{% endraw %}
+
+<script src="/static/js/mustache.min.js?{{ site.data['hash'] }}"></script>
+<script src="/static/js/zdocs.js?{{ site.data['hash'] }}"></script>

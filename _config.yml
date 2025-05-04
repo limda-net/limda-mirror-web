@@ -24,7 +24,7 @@ url: "https://mirror.limda.net"
 hostname: "mirror.limda.net"
 urlv4: "https://mirror4.limda.net"
 urlv6: "https://mirror6.limda.net"
-homelink: "https://mirror.limda.net"
+homelink: "https://limda.net"
 hide_navbar: false
 hide_download: false
 hide_server_status: true
