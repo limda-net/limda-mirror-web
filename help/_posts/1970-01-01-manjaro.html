@@ -1,0 +1,52 @@
+---
+category: help
+layout: help
+mirrorid: manjaro
+excerpt_separator: ""
+---
+
+{% raw %}<h1>Manjaro Software Repository</h1>{% endraw %}
+<div class="z-wrap">
+    <form class="z-form z-global">
+        <div>
+            <label for="e0a5cecb">Protocol</label>
+            <select id="e0a5cecb" name="host">
+                <option selected="selected" value="{{ site.url }}">Auto</option>
+                <option value="{{ site.urlv4 }}">IPv4</option>
+                <option value="{{ site.urlv6 }}">IPv6</option>
+            </select>
+        </div>
+        <div>
+            <input id="a44d763c" name="_scheme" type="checkbox" checked>
+            <label for="a44d763c">Use HTTPS</label>
+        </div>
+        <div>
+            <input id="a659e7da" name="_sudo" type="checkbox">
+            <label for="a659e7da">Use sudo</label>
+        </div>
+    </form>
+</div>
+{% raw %}
+<div class="z-help">
+<p>Included architectures: <code>i686</code>, <code>x86_64</code>, <code>aarch64</code></p>
+<p>Currently, the manjaro source for the AArch64 (ARM) architecture is located in the main source, and the manjaro-arm mirror upstream is no longer updated.</p>
+<h1>Instructions</h1>
+<p>Generate a list of available Bangladeshi mirrors:</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="bash">
+{{sudo}}pacman-mirrors -i -c Bangladesh -m rank
+</pre>
+<p>Check</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl">
+{{endpoint}}/
+</pre>
+<p>Then press the <code>OK</code> key twice.</p>
+<p>Finally refresh the cache:</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="bash">
+{{sudo}}pacman -Syy
+</pre><script id="z-config" type="application/x-mirrorz-help">eyJfIjogIk1hbmphcm8gU29mdHdhcmUgUmVwb3NpdG9yeSIsICJibG9jayI6IFsibWFuamFybyJdLCAiaW5wdXQiOiB7fSwgIm5hbWUiOiAibWFuamFybyJ9</script>
+</div>
+
+{% endraw %}
+
+<script src="/static/js/mustache.min.js?{{ site.data['hash'] }}"></script>
+<script src="/static/js/zdocs.js?{{ site.data['hash'] }}"></script>

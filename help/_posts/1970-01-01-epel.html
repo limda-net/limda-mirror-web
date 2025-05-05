@@ -1,0 +1,82 @@
+---
+category: help
+layout: help
+mirrorid: epel
+excerpt_separator: ""
+---
+
+{% raw %}<h1>EPEL Software Repository</h1>{% endraw %}
+<div class="z-wrap">
+    <form class="z-form z-global">
+        <div>
+            <label for="e0a5cecb">Protocol</label>
+            <select id="e0a5cecb" name="host">
+                <option selected="selected" value="{{ site.url }}">Auto</option>
+                <option value="{{ site.urlv4 }}">IPv4</option>
+                <option value="{{ site.urlv6 }}">IPv6</option>
+            </select>
+        </div>
+        <div>
+            <input id="a44d763c" name="_scheme" type="checkbox" checked>
+            <label for="a44d763c">Use HTTPS</label>
+        </div>
+        <div>
+            <input id="a659e7da" name="_sudo" type="checkbox">
+            <label for="a659e7da">Use sudo</label>
+        </div>
+    </form>
+</div>
+{% raw %}
+<div class="z-help">
+<h2>Project Introduction</h2>
+<p>EPEL(Extra Packages for Enterprise Linux) 是由 Fedora Special Interest Group 维护的 Enterprise Linux（RHEL、CentOS）中经常用到的包。</p>
+<h2>Usage</h2>
+<p>The following uses CentOS 7 as an example to explain how to use the epel image of this mirror site. This method can also be used for CentOS 8 or CentOS Stream.</p>
+<p>First install epel-release from the CentOS Extras repository:</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="bash">
+{{sudo}}yum install epel-release
+</pre>
+<p>Automatically replace with the following command: (from <a href="https://github.com/tuna/issues/issues/687">https://github.com/tuna/issues/issues/687</a>)</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="bash">
+{{sudo}}sed -e 's!^metalink=!#metalink=!g' \
+-e 's!^#baseurl=!baseurl=!g' \
+-e 's!https\?://download\.fedoraproject\.org/pub/epel!{{endpoint}}!g' \
+-e 's!https\?://download\.example/pub/epel!{{endpoint}}!g' \
+-i /etc/yum.repos.d/epel*.repo
+</pre>
+<p>The modification results are as follows: (for reference only, different versions may be different)</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="ini">
+[epel]
+name=Extra Packages for Enterprise Linux 7 - $basearch
+baseurl={{endpoint}}/7/$basearch
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-7&amp;arch=$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+
+[epel-debuginfo]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Debug
+baseurl={{endpoint}}/7/$basearch/debug
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-debug-7&amp;arch=$basearch
+failovermethod=priority
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=1
+
+[epel-source]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Source
+baseurl={{endpoint}}/7/SRPMS
+#mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-source-7&amp;arch=$basearch
+failovermethod=priority
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=1
+</pre>
+<p>Run <code>yum update</code> to test it.</p><script id="z-config" type="application/x-mirrorz-help">eyJfIjogIkVQRUwgU29mdHdhcmUgUmVwb3NpdG9yeSIsICJibG9jayI6IFsiaW50cm8iLCAidXNhZ2UiXSwgImlucHV0Ijoge30sICJuYW1lIjogImVwZWwifQ==</script>
+</div>
+
+{% endraw %}
+
+<script src="/static/js/mustache.min.js?{{ site.data['hash'] }}"></script>
+<script src="/static/js/zdocs.js?{{ site.data['hash'] }}"></script>

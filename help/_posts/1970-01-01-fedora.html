@@ -1,0 +1,88 @@
+---
+category: help
+layout: help
+mirrorid: fedora
+excerpt_separator: ""
+---
+
+{% raw %}<h1>Fedora Software Repository</h1>{% endraw %}
+<div class="z-wrap">
+    <form class="z-form z-global">
+        <div>
+            <label for="e0a5cecb">Protocol</label>
+            <select id="e0a5cecb" name="host">
+                <option selected="selected" value="{{ site.url }}">Auto</option>
+                <option value="{{ site.urlv4 }}">IPv4</option>
+                <option value="{{ site.urlv6 }}">IPv6</option>
+            </select>
+        </div>
+        <div>
+            <input id="a44d763c" name="_scheme" type="checkbox" checked>
+            <label for="a44d763c">Use HTTPS</label>
+        </div>
+        <div>
+            <input id="a659e7da" name="_sudo" type="checkbox">
+            <label for="a659e7da">Use sudo</label>
+        </div>
+    </form>
+</div>
+{% raw %}
+<div class="z-help">
+<h2>Scope</h2>
+<p>Fedora 38 and older versions are no longer officially supported. Fedora has removed the software repositories of Fedora 38 and older versions from the main mirror and moved them to the archive mirror.</p>
+<p>Therefore, Fedora 38 and older versions cannot use the selected mirror. Please use the default configuration file to enable <code>yum</code> / <code>dnf</code> to automatically obtain the available mirror source.</p>
+<h2>Usage</h2>
+<p>Fedora uses <a href="https://zh.fedoracommunity.org/2018/04/05/fedora-secures-package-delivery.html">Metalink</a> by default to give a recommended mirror list to ensure that the mirror repository used by users is new enough and can get security updates as soon as possible, thereby providing better security. Therefore, the default configuration can usually be used without changing the configuration file.</p>
+<p>Because Metalink needs to obtain meta information from the Fedora project server abroad, metalink is not applicable to special situations such as campus intranet and no foreign access. In this case, you can modify the configuration file as follows.</p>
+<p>Fedora can have multiple software source configuration files, including:</p>
+<ul>
+<li>The default <code>fedora</code> repository configuration file is <code>/etc/yum.repos.d/fedora.repo</code></li>
+<li>The default <code>updates</code> repository configuration file is <code>/etc/yum.repos.d/fedora-updates.repo</code></li>
+</ul>
+<p>Make a backup of the above two files, replace them with the following content according to the Fedora system version, and then update the local cache through the <code>sudo dnf makecache</code> command to use the selected software source image.</p>
+<h3>Command Replacement</h3>
+<p>Replace the files under <code>/etc/yum.repos.d</code> with the following command</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="bash">
+{{sudo}}sed -e 's|^metalink=|#metalink=|g' \
+-e 's|^#baseurl=http://download.example/pub/fedora/linux|baseurl={{endpoint}}|g' \
+-i.bak \
+/etc/yum.repos.d/fedora.repo \
+/etc/yum.repos.d/fedora-updates.repo
+</pre>
+<h3>Manual Replacement</h3>
+<p><strong><code>fedora</code> repository (/etc/yum.repos.d/fedora.repo)</strong></p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="ini">
+[fedora]
+name=Fedora $releasever - $basearch
+baseurl={{endpoint}}/releases/$releasever/Everything/$basearch/os/
+#metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&amp;arch=$basearch
+enabled=1
+countme=1
+metadata_expire=7d
+repo_gpgcheck=0
+type=rpm
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
+skip_if_unavailable=False
+</pre>
+<p><strong><code>updates</code> repository (/etc/yum.repos.d/fedora-updates.repo)</strong></p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="ini">
+[updates]
+name=Fedora $releasever - $basearch - Updates
+baseurl={{endpoint}}/updates/$releasever/Everything/$basearch/
+#metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f$releasever&amp;arch=$basearch
+enabled=1
+countme=1
+repo_gpgcheck=0
+type=rpm
+gpgcheck=1
+metadata_expire=6h
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
+skip_if_unavailable=False
+</pre><script id="z-config" type="application/x-mirrorz-help">eyJfIjogIkZlZG9yYSBTb2Z0d2FyZSBSZXBvc2l0b3J5IiwgImJsb2NrIjogWyJjb3ZlciIsICJ1c2FnZSJdLCAiaW5wdXQiOiB7fSwgIm5hbWUiOiAiZmVkb3JhIn0=</script>
+</div>
+
+{% endraw %}
+
+<script src="/static/js/mustache.min.js?{{ site.data['hash'] }}"></script>
+<script src="/static/js/zdocs.js?{{ site.data['hash'] }}"></script>
