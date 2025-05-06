@@ -18,13 +18,17 @@ permalink: /status/
 				{% include status-pic.html name="connection" %}
 				{% include status-pic.html name="traffic" %}
 			</div>
-			<h4># CPU / Memory</h4>
+			<h4># CPU Usage/ Load</h4>
 			<div class="row">
 				{% include status-pic.html name="cpu" %}
-				{% include status-pic.html name="memory" %}
+				{% include status-pic.html name="load" %}
 			</div>
-			<h4># Disk Usage </h4>
-			<div class="row" id="disk-usage">{% raw %}
+			<h4># Memory/ Disk Usage </h4>
+			<div class="row">
+				{% include status-pic.html name="memory" %}
+				{% include status-pic.html name="disk1" %}
+			</div>
+			<!-- <div class="row" id="disk-usage">{% raw %}
 				<div class="col-xs-12" v-if="diskUsages.length"><strong>Disk Usage</strong>: </div>
 				<template v-for="disk in diskUsages">
 				<div class="col-xs-1" v-if="disk.desc">{{ disk.desc }}</div>
@@ -40,7 +44,7 @@ permalink: /status/
 				{% include status-pic.html name="disku" %}
 				{% include status-pic.html name="disk1" %}
 				{% include status-pic.html name="disk2" %}
-			</div>
+			</div> -->
 			{% endunless %}
 			<h3 id="syncing-status"># Sync Status</h3>
 			<table class="table table-condensed flat-md">
