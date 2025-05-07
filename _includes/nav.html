@@ -41,10 +41,11 @@
 			</a> -->
 			
 		<a class="navbar-brand" href="/" style="display: flex; align-items: center; gap: 0.5rem;">
-			<img src="{{ site.base }}/static/img/Limda-logo.png" alt="Limda Logo" style="height: 35px;" />
-			<span>{{ site.school }} Mirror</span>
+			<img src="{{ site.base }}/static/img/logo.svg" alt="Limda Logo" style="height: 35px;" />
+			<!-- <span>{{ site.school }} Mirror</span> -->
 		</a>
     </div>
+
     <div class="{% unless page.legacy %}navbar-collapse collapse {% endunless %}navbar-right">
       <ul class="nav navbar-nav" role="menubar">
         {% unless site.hide_navbar %}
@@ -54,4 +55,17 @@
       </ul>
     </div><!--/.nav-collapse -->
   </div>
+</div>
+
+<div class="text-center" style="margin-top: 5rem;">
+    <h1 class="display-4 fw-bold text-primary-emphasis">
+        Welcome to Limda Host Mirror Server
+    </h1>
+</div>
+<div class="text-center mt-3 px-3">
+    <p class="lead text-secondary" style="font-size: 1.5rem;">
+		This mirror is proudly hosted in Limda Host’s Tier III modular datacenter, located in Dhaka, Bangladesh. <br/>
+		BDIX bandwidth is fully uncapped on our end, allowing speeds of up to 10 Gbps with a properly configured network.<br/>
+		If you experience slow downloads, please reach out to your ISP for assistance.
+    </p>
 </div>
