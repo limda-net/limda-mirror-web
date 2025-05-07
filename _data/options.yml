@@ -7,6 +7,8 @@ official_list:
   - linuxmint-iso
   - ubuntu-archive
   - ubuntu-releases
+  - manjaro
+  - epel
 
 # Content Related
 mirror_desc:
@@ -26,9 +28,13 @@ mirror_desc:
     desc: Ubuntu Software Repo
   - name: ubuntu-releases
     desc: Ubuntu ISO Repo
+  - name: epel
+    desc: Fedora EPEL Repo
+  - name: manjaro
+    desc: Manjaro Linux Repo
 
 
-new_mirrors: []
+new_mirrors: [manjaro, fedora, epel]
 
 unlisted_mirrors: []
 
