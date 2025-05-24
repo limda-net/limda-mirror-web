@@ -2,13 +2,9 @@ official_list:
   - almalinux
   - archlinux
   - debian
-  - fedora
-  - linuxmint
-  - linuxmint-iso
   - ubuntu-archive
   - ubuntu-releases
-  - manjaro
-  - epel
+  - cachy
 
 # Content Related
 mirror_desc:
@@ -32,9 +28,10 @@ mirror_desc:
     desc: Fedora EPEL Repo
   - name: manjaro
     desc: Manjaro Linux Repo
+  - name: cachy
+    desc: CachyOS, a good Arch Linux based distro
 
-
-new_mirrors: [manjaro, fedora, epel]
+new_mirrors: [manjaro, fedora, epel, cachy]
 
 unlisted_mirrors: []
 

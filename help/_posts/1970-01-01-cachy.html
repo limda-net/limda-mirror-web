@@ -1,0 +1,54 @@
+---
+category: help
+layout: help
+mirrorid: cachy
+excerpt_separator: ""
+---
+
+{% raw %}<h1>CachyOS Linux Repository</h1>{% endraw %}
+<div class="z-wrap">
+    <form class="z-form z-global">
+        <div>
+            <label for="e0a5cecb">Protocol</label>
+            <select id="e0a5cecb" name="host">
+                <option selected="selected" value="{{ site.url }}">Auto</option>
+                <option value="{{ site.urlv4 }}">IPv4</option>
+                <option value="{{ site.urlv6 }}">IPv6</option>
+            </select>
+        </div>
+        <div>
+            <input id="a44d763c" name="_scheme" type="checkbox" checked>
+            <label for="a44d763c">Use HTTPS</label>
+        </div>
+        <div>
+            <input id="a659e7da" name="_sudo" type="checkbox">
+            <label for="a659e7da">Use sudo</label>
+        </div>
+    </form>
+</div>
+{% raw %}
+<div class="z-help">
+<h2>Project Introduction</h2>
+<p>CachyOS is designed to deliver lightning-fast speeds and stability, ensuring a smooth and enjoyable computing experience every time you use it. Whether you're a seasoned Linux user or just starting out, CachyOS is the ideal choice for those looking for a powerful, customizable and blazingly fast operating system.</p>
+<h2>Usage</h2>
+<p>As CachyOS is based on archlinux, first make sure you have configured the system to use our archlinux mirror to get maximum speed:<br/><a href="https://mirror.limda.net/help/archlinux">Limda Host Arch Linux Help</a></p>
+<p>Pacman takes the order of servers in for CachyOS <code>cachyos-mirrorlist</code> as priority, so adding mirrors needs to be added at the top of the file; you can also comment out all other mirrors.</p>
+<p>For CachyOS, Edit <code>/etc/pacman.d/cachyos-mirrorlist</code> and add the following to the top of the file:</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="ini" z-path="/etc/pacman.d/mirrorlist">
+Server = {{endpoint}}/repo/$arch/$repo
+</pre>
+<p>Update the package cache:</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="bash">
+{{sudo}}pacman -Syyu
+</pre>
+<p>The two <code>y</code>s can avoid problems when switching from a <strong>broken</strong> mirror to a <strong>normal</strong> mirror.</p>
+<p>If you are switching from a newer mirror to an older one, the following command can downgrade some packages to avoid partial updates of the system.</p>
+<div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="bash">
+{{sudo}}pacman -Syyuu
+</pre><script id="z-config" type="application/x-mirrorz-help">eyJfIjogIkFyY2ggTGludXggUmVwb3NpdG9yeSIsICJibG9jayI6IFsiaW50cm8iLCAidXNhZ2UiXSwgImlucHV0Ijoge30sICJuYW1lIjogImFyY2hsaW51eCJ9</script>
+</div>
+
+{% endraw %}
+
+<script src="/static/js/mustache.min.js?{{ site.data['hash'] }}"></script>
+<script src="/static/js/zdocs.js?{{ site.data['hash'] }}"></script>
