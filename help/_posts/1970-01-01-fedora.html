@@ -44,7 +44,7 @@ excerpt_separator: ""
 <p>Replace the files under <code>/etc/yum.repos.d</code> with the following command</p>
 <div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="bash">
 {{sudo}}sed -e 's|^metalink=|#metalink=|g' \
--e 's|^#baseurl=http://download.example/pub/fedora/linux|baseurl={{endpoint}}|g' \
+-e 's|^#baseurl=http://download.example/pub/fedora/linux|baseurl={{endpoint}}/linux|g' \
 -i.bak \
 /etc/yum.repos.d/fedora.repo \
 /etc/yum.repos.d/fedora-updates.repo
@@ -54,7 +54,7 @@ excerpt_separator: ""
 <div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="ini">
 [fedora]
 name=Fedora $releasever - $basearch
-baseurl={{endpoint}}/releases/$releasever/Everything/$basearch/os/
+baseurl={{endpoint}}/linux/releases/$releasever/Everything/$basearch/os/
 #metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&amp;arch=$basearch
 enabled=1
 countme=1
@@ -69,7 +69,7 @@ skip_if_unavailable=False
 <div class="z-wrap"><form class="z-form" onsubmit="return false"></form><pre class="z-code"></pre></div><pre class="z-tmpl" z-lang="ini">
 [updates]
 name=Fedora $releasever - $basearch - Updates
-baseurl={{endpoint}}/updates/$releasever/Everything/$basearch/
+baseurl={{endpoint}}/linux/updates/$releasever/Everything/$basearch/
 #metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f$releasever&amp;arch=$basearch
 enabled=1
 countme=1
