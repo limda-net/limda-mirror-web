@@ -5,6 +5,8 @@ official_list:
   - ubuntu-archive
   - ubuntu-releases
   - cachy
+  - fedora
+  - rockylinux
 
 # Content Related
 mirror_desc:
@@ -30,8 +32,10 @@ mirror_desc:
     desc: Manjaro Linux Repo
   - name: cachy
     desc: CachyOS, a good Arch Linux based distro
+  - name: rockylinux
+    desc: RockyLinux Software Repo
 
-new_mirrors: [manjaro, fedora, epel, cachy]
+new_mirrors: [manjaro, epel, cachy, rockylinux]
 
 unlisted_mirrors: []
 
