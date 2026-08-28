@@ -81,4 +81,17 @@
   </div><!--/container-->
 </footer>
 
+{%- comment -%}
+  Email obfuscation. This lived in the previous footer markup and was lost when
+  the footer was rewritten, leaving <a class="eib1gieB"> empty on the home page.
+  The WebFont.load() call that sat beside it is gone for good: the face is now
+  declared in CSS with font-display, so webfont.js is no longer loaded.
+{%- endcomment -%}
+<script>
+var lei3Po8h = ["mirr" + "or", ["lim", "da"].join("") + "." + ["ne", "t"].join("")].join("@");
+$('a.eib1gieB')
+  .text(lei3Po8h)
+  .attr('href', ["ma", "lto", ":"].join("") + lei3Po8h);
+</script>
+
 <script src="{{ site.base }}/static/js/theme.js?{{ site.data['hash'] }}"></script>

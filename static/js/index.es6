@@ -1,7 +1,8 @@
 ---
 ---
 $(document).ready(() => {
-$('.selectpicker').selectpicker()
+// bootstrap-select removed: no page has `.selectpicker` markup, and calling
+// this unguarded threw before the rest of the file could run.
 
 var global_options = {% include options.json %};
 var label_map = global_options.options.label_map;

@@ -40,17 +40,38 @@ document.documentElement.className+=' has-js';})();</script>
 <title>{{ page_title }}</title>
 {% unless include.nostyle %}
 <link rel="stylesheet" href="{{ site.base }}/static/css/bootstrap.min.css?{{ site.data['hash'] }}">
-<link rel="stylesheet" href="{{ site.base }}/static/css/bootstrap-select.min.css?{{ site.data['hash'] }}">
 <link rel="stylesheet" href="{{ site.base }}/static/css/style.css?{{ site.data['hash'] }}">
+{%- comment -%}
+  Per-page script gating. Previously every page loaded all of these, so a
+  directory listing pulled Vue, bootstrap-select and timeago it never uses --
+  roughly 140 KB of script plus two XHRs for home-page data, on the site's
+  most-visited page type.
+
+  uses_indexjs : pages that load index.js and therefore need Vue -- layout
+                 `index`, status.html, and the fancy-index listing templates,
+                 all flagged with `js_indexjs: true`.
+  bootstrap-select was removed outright: no page contains `.selectpicker`
+  markup, so it was 39 KB of JS+CSS doing nothing on every page.
+  uses_help    : help layouts, whose help.js uses Mark.up.
+  webfont.js was removed: the only WebFont.load() call lived in the footer and
+  the face is declared in CSS with font-display, so it did nothing.
+{%- endcomment -%}
+{%- assign uses_indexjs = false -%}
+{%- if page.layout == 'index' or page.js_indexjs -%}{%- assign uses_indexjs = true -%}{%- endif -%}
+{%- assign uses_help = false -%}
+{%- if page.layout == 'help' or page.layout == 'helpz' -%}{%- assign uses_help = true -%}{%- endif -%}
+
 <script src="{{ site.base }}/static/js/jquery.min.js?{{ site.data['hash'] }}"></script>
 <script src="{{ site.base }}/static/js/bootstrap.min.js?{{ site.data['hash'] }}"></script>
-<script src="{{ site.base }}/static/js/bootstrap-select.min.js?{{ site.data['hash'] }}"></script>
+{% if uses_indexjs %}
 {% unless page.legacy %}
 <script src="{{ site.base }}/static/js/vue.min.js?{{ site.data['hash'] }}"></script>
 <script src="{{ site.base }}/static/js/timeago.min.js?{{ site.data['hash'] }}"></script>
 {% endunless %}
+{% endif %}
+{% if uses_help %}
 <script src="{{ site.base }}/static/js/markup.min.js?{{ site.data['hash'] }}"></script>
-<script src="{{ site.base }}/static/js/webfont.js?{{ site.data['hash'] }}"></script>
+{% endif %}
 <script src="{{ site.base }}/static/js/thuhidden.js?{{ site.data['hash'] }}"></script>
 {% if page.legacy %}
 <style>

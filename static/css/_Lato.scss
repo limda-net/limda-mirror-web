@@ -1,36 +1,47 @@
-/* Webfont: Lato-Bold */@font-face {
+// ---------------------------------------------------------------------------
+// Lato -- subset to latin + latin-ext, woff2 only.
+//
+// The original files were 4.2 MB across eot/ttf/woff/woff2 for three weights;
+// browsers fetched 549 KB of woff2, which was 42% of a directory-listing page.
+// Subsetting to the ranges this site actually renders brings that to 170 KB.
+// eot/ttf/woff are dropped: woff2 has had universal support for years, and the
+// full-coverage originals remain in git history if a wider subset is ever
+// needed.
+//
+// Regenerate (needs `pip install fonttools brotli`), from static/fonts:
+//   python3 -m fontTools.subset Lato-Regular.woff2 \
+//     --unicodes="U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,\
+// U+02DC,U+0100-024F,U+0259,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,\
+// U+2212,U+2215,U+FEFF,U+FFFD" \
+//     --layout-features='*' --flavor=woff2 --output-file=Lato-Regular.subset.woff2
+//
+// font-display: swap renders text immediately in the fallback face rather than
+// leaving it invisible while the font downloads.
+// ---------------------------------------------------------------------------
+
+@font-face {
   font-family: 'Lato';
-  src: url('../fonts/Lato-Bold.eot'); /* IE9 Compat Modes */
-  src: url('../fonts/Lato-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/Lato-Bold.woff2') format('woff2'), /* Modern Browsers */
-       url('../fonts/Lato-Bold.woff') format('woff'), /* Modern Browsers */
-       url('../fonts/Lato-Bold.ttf') format('truetype');
+  src: url('../fonts/Lato-Regular.subset.woff2') format('woff2');
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('../fonts/Lato-Bold.subset.woff2') format('woff2');
   font-style: normal;
   font-weight: bold;
+  font-display: swap;
   text-rendering: optimizeLegibility;
 }
 
-/* Webfont: Lato-Italic */@font-face {
+@font-face {
   font-family: 'Lato';
-  src: url('../fonts/Lato-Italic.eot'); /* IE9 Compat Modes */
-  src: url('../fonts/Lato-Italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/Lato-Italic.woff2') format('woff2'), /* Modern Browsers */
-       url('../fonts/Lato-Italic.woff') format('woff'), /* Modern Browsers */
-       url('../fonts/Lato-Italic.ttf') format('truetype');
+  src: url('../fonts/Lato-Italic.subset.woff2') format('woff2');
   font-style: italic;
   font-weight: normal;
+  font-display: swap;
   text-rendering: optimizeLegibility;
 }
-
-/* Webfont: Lato-Regular */@font-face {
-  font-family: 'Lato';
-  src: url('../fonts/Lato-Regular.eot'); /* IE9 Compat Modes */
-  src: url('../fonts/Lato-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/Lato-Regular.woff2') format('woff2'), /* Modern Browsers */
-       url('../fonts/Lato-Regular.woff') format('woff'), /* Modern Browsers */
-       url('../fonts/Lato-Regular.ttf') format('truetype');
-  font-style: normal;
-  font-weight: normal;
-  text-rendering: optimizeLegibility;
-}
-
