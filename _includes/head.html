@@ -1,4 +1,12 @@
 <head>
+{%- comment -%}
+Applies the stored theme before first paint so a dark-mode visitor never sees
+a white flash, and marks the root .has-js so the switcher button is hidden
+when scripting is unavailable (see _limda-ui.scss).
+{%- endcomment -%}
+<script>(function(){try{var m=localStorage.getItem('limda-theme');
+if(m==='light'||m==='dark')document.documentElement.setAttribute('data-theme',m);}catch(e){}
+document.documentElement.className+=' has-js';})();</script>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">

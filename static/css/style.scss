@@ -47,8 +47,24 @@ $color_primary_dark: $color_thu_purple_dark;
 
 @mixin dark {
   {% unless site.issue %}
+    // Emitted twice so the theme can be switched manually, not just followed
+    // from the OS: a bare media query cannot be overridden by an attribute.
+    //   - inside the media query, suppressed when the visitor chose light
+    //   - again under html[data-theme="dark"] for an explicit choice
+    // With no data-theme attribute the result is identical to before.
+    // `@if &` is needed because this mixin is also used at top level
+    // (see _bootstrap-mod.scss), where `&` is null.
     @media (prefers-color-scheme: dark) {
-      @content
+      @if & {
+        html:not([data-theme="light"]) & { @content }
+      } @else {
+        html:not([data-theme="light"]) { @content }
+      }
+    }
+    @if & {
+      html[data-theme="dark"] & { @content }
+    } @else {
+      html[data-theme="dark"] { @content }
     }
   {% else %}
   @content
@@ -68,6 +84,7 @@ $color_primary_dark: $color_thu_purple_dark;
 "structure",
 "bootstrap-mod",
 "syntax-highlighting",
+"limda-ui",
 "_spinners/3-wave";
 
 {% unless site.issue %}
@@ -233,17 +250,6 @@ body {
   i, i:hover, a, a:hover {
     color: $color_footer_content;
   }
-}
-
-#footerwrap.tuna-foot-1 {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-#footerwrap.tuna-foot-2 {
-  visibility: hidden;
 }
 
 .spacing {

@@ -1,78 +1,84 @@
-<!-- Promotional Section (Final Optimized Spacing with Inline Styles) -->
-<div class="text-center px-3" style="margin-top: 5rem; margin-bottom: -8rem;">
-  <p class="text-secondary" style="font-size: 1.5rem; margin-bottom: 0.5rem;">
-    <strong>Need your own CentOS, Ubuntu, Fedora, cPanel, or Email server in Bangladesh?</strong><br>
-    Host it locally with <strong>Limda Host</strong> — your trusted datacenter provider.
-  </p>
-  <p class="text-secondary" style="font-size: 1.5rem; margin-bottom: 0;">
-    🌐 <a href="https://www.limda.net" class="link-primary" target="_blank">www.limda.net</a> |
-    📧 <a href="mailto:mirror@limda.net" class="link-primary">mirror@limda.net</a> |
-    📞 +8809606119933 |
-    💬 <a href="https://www.facebook.com/groups/mirrorbangladesh/" class="link-primary" target="_blank">Mirror Bangladesh (Facebook Group)</a>
-  </p>
-</div>
-
-{% for footer-i in (1..2) %}
-{% unless page.legacy and footer-i == 1 %}
-
-<!-- Main Footer Section -->
-<div id="footerwrap" class="tuna-foot-{{ footer-i }}"{% if page.legacy %} style="visibility: visible;"{% endif %}>
+<!-- Call to action -->
+<section class="cta-band" aria-labelledby="cta-title">
   <div class="container">
-    <div class="row align-items-start">
-      
-      <!-- Left: Logo + Info -->
-      <div class="col-lg-4 col-md-4{% if page.legacy %} col-xs-4{% endif %} text-start mb-4 mb-lg-0">
-        <a href="https://limda.net"><img src="{{ site.base }}/static/img/logo.svg" alt="Limda Host Logo" style="height: 30px; margin-bottom: 1rem;"></a>
-        <p class="text-secondary mb-0">
-          This site is operated by <a href="https://limda.net">{{ site.operator }}</a>, with infrastructure provided by <a href="https://limda.net">Limda Host</a>.
-        </p>
+    <div class="cta-inner">
+      <div class="cta-copy">
+        <h2 id="cta-title">Need your own server in Bangladesh?</h2>
+        <p>CentOS, Ubuntu, Fedora, cPanel or email hosting &mdash; run it locally with
+           {{ site.operator }}, from our Tier III datacenter in Dhaka on uncapped BDIX bandwidth.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="cta-btn" href="{{ site.homelink }}" target="_blank" rel="noopener">View hosting plans</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%}
+  Single footer. This used to be a `for footer-i in (1..2)` loop rendering the
+  block twice: .tuna-foot-1 position:absolute at the page bottom, plus an
+  identical copy set visibility:hidden purely to reserve its height. That
+  duplicated every link and emitted a duplicate element id. Sticking to the
+  bottom is now a flex column on <body> (see _limda-ui.scss).
+  Liquid comment, not HTML: this note should not ship to every page.
+{%- endcomment -%}
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="sf-grid">
+
+      <div class="sf-brand">
+        <a href="{{ site.homelink }}" aria-label="{{ site.brand }}"><img src="{{ site.base }}/static/img/logo.svg" alt="{{ site.brand }}"></a>
+        <p>A public mirror of open-source software, operated by
+           <a href="{{ site.homelink }}">{{ site.operator }}</a> from a Tier III datacenter
+           in Dhaka, Bangladesh.</p>
+        <span class="sf-tag">10 Gbps &middot; BDIX uncapped</span>
       </div>
 
-<!-- Middle: BDIX Services -->
-<div class="col-lg-4 col-md-4{% if page.legacy %} col-xs-4{% endif %} text-start mb-4 mb-lg-0">
-  <h5 class="fw-bold" style="font-size: 1.5rem; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 0.5rem; margin-bottom: 1rem;">
-    BDIX Services
-  </h5>
-  <ul class="text-secondary" style="padding-left: 1.2rem;">
-    <li><a href="https://limda.net/web-hosting.php" class="link-primary" target="_blank">BDIX Hosting</a></li>
-    <li><a href="https://limda.net/vps-hosting.php" class="link-primary" target="_blank">BDIX VPS Hosting</a></li>
-    <li><a href="https://limda.net/dedicated-server.php" class="link-primary" target="_blank">BDIX Dedicated Server</a></li>
-    <li><a href="https://limda.net/email-hosting.php" class="link-primary" target="_blank">BDIX Email Server</a></li>
-  </ul>
-</div>
+      <nav class="sf-col" aria-label="Mirror">
+        <h2>Mirror</h2>
+        <ul>
+          <li><a href="{{ site.base }}/">Mirror list</a></li>
+          <li><a href="{{ site.base }}/help/">Help</a></li>
+          {% unless site.hide_server_status %}
+          <li><a href="{{ site.base }}/status/#server-status">Server status</a></li>
+          {% endunless %}
+          <li><a href="{{ site.base }}/status/#syncing-status">Sync status</a></li>
+          <li><a href="{{ site.base }}/status/#visitors-by-country">Visitors by country</a></li>
+        </ul>
+      </nav>
 
-<!-- Right: Social Links -->
-<div class="col-lg-4 col-md-4{% if page.legacy %} col-xs-4{% endif %} text-start">
-  <h5 class="fw-bold" style="font-size: 1.5rem; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 0.5rem; margin-bottom: 1rem;">
-    Social Links
-  </h5>
-  <ul class="text-secondary" style="padding-left: 1.2rem;">
-    <li><a href="https://www.facebook.com/limdaweb" target="_blank" class="link-primary">Facebook</a></li>
-    <li><a href="https://www.instagram.com/limda_host/" target="_blank" class="link-primary">Instagram</a></li>
-    <li><a href="https://twitter.com/limdahost" target="_blank" class="link-primary">Twitter</a></li>
-    <li><a href="https://linkedin.com/company/limda" target="_blank" class="link-primary">LinkedIn</a></li>
-  </ul>
-</div>
+      <nav class="sf-col" aria-label="BDIX services">
+        <h2>BDIX Services</h2>
+        <ul>
+          <li><a href="https://limda.net/web-hosting.php" target="_blank" rel="noopener">Web hosting</a></li>
+          <li><a href="https://limda.net/vps-hosting.php" target="_blank" rel="noopener">VPS hosting</a></li>
+          <li><a href="https://limda.net/dedicated-server.php" target="_blank" rel="noopener">Dedicated servers</a></li>
+          <li><a href="https://limda.net/email-hosting.php" target="_blank" rel="noopener">Email hosting</a></li>
+        </ul>
+      </nav>
 
+      <div class="sf-col">
+        <h2>Contact</h2>
+        <ul>
+          <li><a class="eib1gieB">mirror [at] limda.net</a></li>
+          <li><a href="tel:+8809606119933">+880 9606 119933</a></li>
+          <li><a href="https://www.facebook.com/groups/mirrorbangladesh/" target="_blank" rel="noopener">Mirror Bangladesh group</a></li>
+        </ul>
+        <div class="sf-social">
+          <a href="https://www.facebook.com/limdaweb" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.instagram.com/limda_host/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://twitter.com/limdahost" target="_blank" rel="noopener">Twitter</a>
+          <a href="https://linkedin.com/company/limda" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
 
-    </div><!--/row-->
+    </div><!--/sf-grid-->
+
+    <div class="sf-bottom">
+      <p>&copy; {{ site.operator }} &middot; Dhaka, Bangladesh</p>
+      <p>Mirrored software remains under the licences of its respective projects.</p>
+    </div>
   </div><!--/container-->
-</div><!--/footerwrap-->
+</footer>
 
-{% endunless %}
-{% endfor %}
-
-<!-- Font & Email Obfuscation -->
-<script>
-WebFont.load({
-  custom: {
-    families: ['Lato']
-  }
-});
-var lei3Po8h = ["mirr" + "or", ["lim", "da"].join("") + "." + ["ne", "t"].join("")].join("@");
-$('a.eib1gieB')
-  .text(lei3Po8h)
-  .attr('href', ["ma", "lto", ":"].join("") + lei3Po8h);
-</script>
-
-{% fa_svg_generate %}
+<script src="{{ site.base }}/static/js/theme.js?{{ site.data['hash'] }}"></script>
