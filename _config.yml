@@ -49,3 +49,11 @@ plugins:
 babel_js_extensions: 'es6'
 
 exclude: [Gemfile, Gemfile.lock, README.md, gen_robot.sh, vendor, geninfo/, gen_desc.py, Dockerfile*, build.sh]
+
+# Generated at runtime on the server, NOT from this repo. A Jekyll build wipes
+# anything in the destination that is not in the source, so without this the
+# Grafana status PNGs and the access-protected traffic report are deleted on
+# every deploy and stay missing until the next 3-hourly cron run.
+keep_files:
+  - static/status
+  - private
